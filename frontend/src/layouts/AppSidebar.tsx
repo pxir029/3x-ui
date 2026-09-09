@@ -14,9 +14,7 @@ import {
   DashboardOutlined,
   DatabaseOutlined,
   ExportOutlined,
-  GithubOutlined,
   GlobalOutlined,
-  HeartOutlined,
   ImportOutlined,
   LogoutOutlined,
   MailOutlined,
@@ -37,14 +35,11 @@ import {
 } from '@ant-design/icons';
 
 import { HttpUtil } from '@/utils';
-import { formatPanelVersion } from '@/lib/panel-version';
 import { pauseAnimationsUntilLeave, useTheme } from '@/hooks/useTheme';
 import { useAllSettings } from '@/api/queries/useAllSettings';
 import './AppSidebar.css';
 
-const DONATE_URL = 'https://donate.sanaei.dev/';
 const DOCS_URL = 'https://docs.sanaei.dev/';
-const REPO_URL = 'https://github.com/MHSanaei/3x-ui';
 const LOGOUT_KEY = '__logout__';
 const RAIL_WIDTH = 72;
 const SIDER_WIDTH = 220;
@@ -81,21 +76,6 @@ const iconByName: Record<IconName, ComponentType> = {
   routing: SwapOutlined,
 };
 
-function DonateButton({ ariaLabel }: { ariaLabel: string }) {
-  return (
-    <a
-      href={DONATE_URL}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="sidebar-donate"
-      aria-label={ariaLabel}
-      title={ariaLabel}
-    >
-      <HeartOutlined />
-    </a>
-  );
-}
-
 function DocsButton({ ariaLabel }: { ariaLabel: string }) {
   return (
     <a
@@ -107,24 +87,6 @@ function DocsButton({ ariaLabel }: { ariaLabel: string }) {
       title={ariaLabel}
     >
       <ReadOutlined />
-    </a>
-  );
-}
-
-function VersionBadge({ version, collapsed }: { version: string; collapsed?: boolean }) {
-  if (!version) return null;
-  const label = formatPanelVersion(version);
-  return (
-    <a
-      href={REPO_URL}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="sider-version"
-      aria-label={`GitHub ${label}`}
-      title={label}
-    >
-      <GithubOutlined />
-      {!collapsed && <span className="sider-version-text">{label}</span>}
     </a>
   );
 }
@@ -210,7 +172,6 @@ export default function AppSidebar() {
   }, [updateHovered]);
 
   const currentTheme: 'light' | 'dark' = isDark ? 'dark' : 'light';
-  const panelVersion = window.X_UI_CUR_VER || '';
 
   const tabs = useMemo<{ key: string; icon: IconName; title: string }[]>(
     () => [
@@ -366,7 +327,7 @@ export default function AppSidebar() {
       >
         <div className="sider-brand">
           <div className="brand-block">
-            <span className="brand-text">{railCollapsed ? '3X' : '3X-UI'}</span>
+            <span className="brand-text">{railCollapsed ? 'PX' : 'pxpanel'}</span>
           </div>
           {!railCollapsed && (
             <div className="brand-actions">
@@ -381,7 +342,6 @@ export default function AppSidebar() {
                 {pinned ? <PushpinFilled /> : <PushpinOutlined />}
               </button>
               <DocsButton ariaLabel={t('menu.docs') || 'Documentation'} />
-              <DonateButton ariaLabel={t('menu.donate') || 'Donate'} />
               <ThemeCycleButton
                 id="theme-cycle"
                 isDark={isDark}
@@ -410,9 +370,6 @@ export default function AppSidebar() {
           items={toMenuItems(utilItems)}
           onClick={onMenuClick}
         />
-        <div className="sider-footer">
-          <VersionBadge version={panelVersion} collapsed={railCollapsed} />
-        </div>
       </Layout.Sider>
 
       <Drawer
@@ -429,12 +386,10 @@ export default function AppSidebar() {
         onClose={() => setDrawerOpen(false)}
       >
         <div className="drawer-header">
-          <div className="brand-block">
-            <span className="drawer-brand">3X-UI</span>
+          <div className="drawer-brand">
+            <span className="brand-text">pxpanel</span>
           </div>
           <div className="drawer-header-actions">
-            <DocsButton ariaLabel={t('menu.docs') || 'Documentation'} />
-            <DonateButton ariaLabel={t('menu.donate') || 'Donate'} />
             <ThemeCycleButton
               id="theme-cycle-drawer"
               isDark={isDark}
@@ -443,9 +398,9 @@ export default function AppSidebar() {
               ariaLabel={t('menu.theme')}
             />
             <button
-              className="drawer-close"
               type="button"
-              aria-label={t('close')}
+              className="drawer-close"
+              aria-label="Close"
               onClick={() => setDrawerOpen(false)}
             >
               <CloseOutlined />
@@ -458,7 +413,7 @@ export default function AppSidebar() {
           selectedKeys={[selectedKey]}
           openKeys={openKeys}
           onOpenChange={(keys) => setOpenKeys(keys as string[])}
-          className="drawer-menu drawer-nav"
+          className="drawer-menu"
           items={toMenuItems(navItems)}
           onClick={(info) => {
             onMenuClick(info);
@@ -469,28 +424,23 @@ export default function AppSidebar() {
           theme={currentTheme}
           mode="inline"
           selectedKeys={[selectedKey]}
-          className="drawer-menu drawer-utility"
+          className="drawer-utility"
           items={toMenuItems(utilItems)}
           onClick={(info) => {
             onMenuClick(info);
             setDrawerOpen(false);
           }}
         />
-        <div className="drawer-footer">
-          <VersionBadge version={panelVersion} />
-        </div>
       </Drawer>
 
-      {!drawerOpen && (
-        <button
-          className="drawer-handle"
-          type="button"
-          aria-label={t('menu.openMenu')}
-          onClick={() => setDrawerOpen(true)}
-        >
-          <MenuOutlined />
-        </button>
-      )}
+      <button
+        type="button"
+        className="drawer-handle"
+        aria-label="Open menu"
+        onClick={() => setDrawerOpen(true)}
+      >
+        <MenuOutlined />
+      </button>
     </div>
   );
 }
