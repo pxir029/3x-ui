@@ -30,7 +30,7 @@ import { pauseAnimationsUntilLeave, useTheme } from '@/hooks/useTheme';
 import { LoginFormSchema, TwoFactorCodeSchema, type LoginFormValues } from '@/schemas/login';
 import './LoginPage.css';
 
-const HEADLINE_INTERVAL_MS = 2000;
+const HEADLINE_INTERVAL_MS = 2800;
 
 type LoginForm = LoginFormValues;
 
@@ -133,6 +133,14 @@ export default function LoginPage() {
     <ConfigProvider theme={antdThemeConfig}>
       {messageContextHolder}
       <Layout className={pageClass}>
+        {/* Animated background orbs */}
+        <div className="bg-orbs" aria-hidden="true">
+          <div className="orb orb-1" />
+          <div className="orb orb-2" />
+          <div className="orb orb-3" />
+          <div className="orb orb-4" />
+        </div>
+
         <Layout.Content className="login-content">
           <div className="login-toolbar">
             <Button
@@ -177,14 +185,19 @@ export default function LoginPage() {
                 <Spin size="large" />
               </div>
             ) : (
-              <div className="login-card">
+              <div className="login-card glass">
                 <div className="brand">
+                  <div className="brand-logo">
+                    <span className="brand-letter">P</span>
+                  </div>
                   <span className="brand-name">pxpanel</span>
-                  <span className="brand-accent" aria-hidden="true" />
+                  <span className="brand-tagline">Secure Control Panel</span>
                 </div>
 
                 <h2 className="welcome">
-                  <b key={headlineIndex}>{headlineWords[headlineIndex]}</b>
+                  <span className="welcome-text" key={headlineIndex}>
+                    {headlineWords[headlineIndex]}
+                  </span>
                 </h2>
 
                 <FormProvider {...methods}>
@@ -199,11 +212,12 @@ export default function LoginPage() {
                       rules={{ validate: rhfZodValidate(LoginFormSchema.shape.username) }}
                     >
                       <Input
-                        prefix={<UserOutlined />}
+                        prefix={<UserOutlined className="input-icon" />}
                         autoComplete="username"
                         size="large"
                         placeholder={t('username')}
                         autoFocus
+                        className="glass-input"
                       />
                     </FormField>
 
@@ -213,10 +227,11 @@ export default function LoginPage() {
                       rules={{ validate: rhfZodValidate(LoginFormSchema.shape.password) }}
                     >
                       <Input.Password
-                        prefix={<LockOutlined />}
+                        prefix={<LockOutlined className="input-icon" />}
                         autoComplete="current-password"
                         size="large"
                         placeholder={t('password')}
+                        className="glass-input"
                       />
                     </FormField>
 
@@ -227,10 +242,11 @@ export default function LoginPage() {
                         rules={{ validate: rhfZodValidate(TwoFactorCodeSchema) }}
                       >
                         <Input
-                          prefix={<KeyOutlined />}
+                          prefix={<KeyOutlined className="input-icon" />}
                           autoComplete="one-time-code"
                           size="large"
                           placeholder={t('twoFactorCode')}
+                          className="glass-input"
                         />
                       </FormField>
                     )}
@@ -242,6 +258,7 @@ export default function LoginPage() {
                         loading={submitting}
                         size="large"
                         block
+                        className="login-btn"
                       >
                         {t('login')}
                       </Button>
