@@ -6,18 +6,22 @@ RUN apk add --no-cache \
     ca-certificates \
     tzdata \
     sqlite \
-    && ln -sf /usr/share/zoneinfo/Asia/Tehran /etc/localtime
+    && ln -sf /usr/share/zoneinfo/Asia/Tehran /etc/localtime \
+    && mkdir -p /etc/x-ui /var/log/x-ui /usr/local/x-ui
 
-# آخرین نسخه پایدار ۳x-ui (در صورت نیاز نسخه را آپدیت کنید)
+# دانلود و نصب آخرین نسخه پایدار
 ARG XUI_VERSION=v3.7.0
-RUN curl -L "https://github.com/mhsanaei/3x-ui/releases/download/${XUI_VERSION}/x-ui-linux-amd64.tar.gz" -o /tmp/x-ui.tar.gz \
-    && tar -xzf /tmp/x-ui.tar.gz -C /usr/local/ \
-    && rm /tmp/x-ui.tar.gz \
+RUN curl -fsSL "https://github.com/mhsanaei/3x-ui/releases/download/${XUI_VERSION}/x-ui-linux-amd64.tar.gz" -o /tmp/x-ui.tar.gz \
+    && tar -xzf /tmp/x-ui.tar.gz -C /tmp \
+    && mv /tmp/x-ui/* /usr/local/x-ui/ \
+    && rm -rf /tmp/x-ui.tar.gz /tmp/x-ui \
     && chmod +x /usr/local/x-ui/x-ui \
-    && mkdir -p /etc/x-ui /var/log/x-ui
+    && chmod +x /usr/local/x-ui/bin/xray-linux-amd64 || true
 
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
+
+WORKDIR /usr/local/x-ui
 
 EXPOSE 2053
 

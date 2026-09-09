@@ -4,5 +4,6 @@ dockerfilePath = "Dockerfile"
 
 [deploy]
 restartPolicyType = "always"
-healthcheckPath = "/"
-healthcheckTimeout = 30
+# healthcheck اختیاری - اگر پنل هنوز بالا نیومده خطا نده
+# healthcheckPath = "/"
+# healthcheckTimeout = 100

@@ -1,32 +1,34 @@
-# راهنمای دیپلوی ۳x-ui (سنایی) روی Railway
+# رفع خطای Application failed to respond
 
-## فایل‌های لازم
-این فایل‌ها را در **روت** ریپازیتوری فورک‌شده خود قرار دهید:
+## کارهای ضروری بعد از دیپلوی
 
-- `Dockerfile`
-- `start.sh`
-- `railway.toml`
-- `.dockerignore` (اختیاری)
+### ۱. تنظیم Target Port در Railway
+1. برو به سرویس خودت در Railway
+2. **Settings → Networking**
+3. روی دامنه کلیک کن یا Edit بزن
+4. **Target Port** را روی همان پورتی بگذار که در لاگ نوشته شده (معمولاً عدد PORT که Railway داده، مثلاً `8080` یا `3000`)
+5. ذخیره کن
 
-## مراحل دیپلوی
+> اگر Target Port اشتباه باشد، دقیقاً خطای "Application failed to respond" می‌گیری.
 
-1. فایل‌های بالا را به روت پروژه فورک‌شده اضافه کنید و push کنید.
-2. وارد [Railway.app](https://railway.app) شوید.
-3. New Project → Deploy from GitHub repo → فورک خود را انتخاب کنید.
-4. بعد از دیپلوی موفق:
-   - Settings → Networking → Generate Domain
-5. پنل در آدرس زیر در دسترس است:
-   ```
-   https://your-app.up.railway.app
-   ```
+### ۲. Volume برای دیتابیس (خیلی مهم)
+1. در Railway روی سرویس → **Volumes** یا **New Volume**
+2. Mount Path را بگذار: `/etc/x-ui`
+3. بدون این کار، هر بار ریستارت تنظیمات و کاربران پاک می‌شود.
 
-## نکات مهم
+### ۳. چک کردن لاگ‌ها
+در تب **Deployments → View Logs** باید این خطوط را ببینی:
+```
+🚀 3x-ui starting on Railway
+   PORT = xxxx
+Starting x-ui process...
+```
+اگر خطا دیدی، اسکرین‌شات یا متن لاگ را بفرست.
 
-- یوزر و پسورد پیش‌فرض معمولاً `admin` / `admin` است. **فوری عوض کنید**.
-- برای حفظ دیتابیس بعد از ریستارت، یک Volume بسازید و به مسیر `/etc/x-ui` مانت کنید.
-- برای اینباندهای Reality / gRPC / TCP از **TCP Proxy** در Railway استفاده کنید.
-- اگر نسخه جدید ۳x-ui منتشر شد، مقدار `XUI_VERSION` داخل Dockerfile را آپدیت کنید.
+### ۴. ورود به پنل
+- آدرس: `https://your-domain.up.railway.app`
+- یوزر/پسورد پیش‌فرض معمولاً `admin` / `admin` است (فوری عوض کن)
 
-## لینک‌های مفید
-- ریپوی اصلی: https://github.com/mhsanaei/3x-ui
-- ریلیزها: https://github.com/mhsanaei/3x-ui/releases
+## نکات
+- برای اینباندهای Reality و gRPC از **TCP Proxy** استفاده کن.
+- اگر نسخه جدید ۳x-ui آمد، فقط `XUI_VERSION` داخل Dockerfile را عوض کن.
