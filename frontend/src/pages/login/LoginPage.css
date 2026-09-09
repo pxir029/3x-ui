@@ -1,27 +1,25 @@
 /* ============================================
-   pxpanel — Premium Glassmorphism Login
+   pxpanel — Ultra Clean Glassmorphism Login
    ============================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap');
 
 .login-app {
   --font-main: 'Inter', system-ui, -apple-system, sans-serif;
   --font-display: 'Outfit', 'Inter', system-ui, sans-serif;
 
-  /* Light */
-  --bg-page: #0a0f1c;
-  --glass-bg: rgba(255, 255, 255, 0.08);
-  --glass-border: rgba(255, 255, 255, 0.18);
-  --glass-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45);
-  --color-text: #f8fafc;
+  --bg-page: #070b14;
+  --glass-bg: rgba(255, 255, 255, 0.055);
+  --glass-border: rgba(255, 255, 255, 0.14);
+  --color-text: #f1f5f9;
   --color-text-subtle: #94a3b8;
-  --color-accent: #6366f1;
-  --color-accent-2: #a855f7;
-  --color-accent-glow: rgba(99, 102, 241, 0.45);
-  --input-bg: rgba(255, 255, 255, 0.06);
-  --input-border: rgba(255, 255, 255, 0.14);
-  --toolbar-bg: rgba(255, 255, 255, 0.08);
-  --toolbar-border: rgba(255, 255, 255, 0.16);
+  --color-accent: #818cf8;
+  --color-accent-2: #c084fc;
+  --color-accent-soft: rgba(129, 140, 248, 0.18);
+  --input-bg: rgba(255, 255, 255, 0.05);
+  --input-border: rgba(255, 255, 255, 0.12);
+  --toolbar-bg: rgba(255, 255, 255, 0.06);
+  --toolbar-border: rgba(255, 255, 255, 0.13);
 
   position: relative;
   min-height: 100vh;
@@ -30,18 +28,14 @@
   font-family: var(--font-main);
 }
 
-/* Dark / Ultra variants keep the same glass aesthetic */
 .login-app.is-dark,
 .login-app.is-ultra {
   --bg-page: #05070f;
-  --glass-bg: rgba(255, 255, 255, 0.06);
-  --glass-border: rgba(255, 255, 255, 0.12);
-  --color-accent: #818cf8;
-  --color-accent-2: #c084fc;
-  --color-accent-glow: rgba(129, 140, 248, 0.5);
+  --glass-bg: rgba(255, 255, 255, 0.045);
+  --glass-border: rgba(255, 255, 255, 0.11);
 }
 
-/* ========== Animated Background Orbs ========== */
+/* ========== Soft Ambient Orbs ========== */
 .bg-orbs {
   position: absolute;
   inset: 0;
@@ -53,70 +47,63 @@
 .orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.55;
-  animation: float 18s ease-in-out infinite;
+  filter: blur(100px);
+  opacity: 0.4;
+  animation: float 22s ease-in-out infinite;
 }
 
 .orb-1 {
-  width: 420px;
-  height: 420px;
-  background: radial-gradient(circle, #6366f1 0%, transparent 70%);
-  top: -12%;
-  left: -8%;
-  animation-delay: 0s;
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, #6366f1 0%, transparent 68%);
+  top: -18%;
+  left: -12%;
 }
 
 .orb-2 {
-  width: 360px;
-  height: 360px;
-  background: radial-gradient(circle, #a855f7 0%, transparent 70%);
-  bottom: -10%;
-  right: -5%;
-  animation-delay: -6s;
-  animation-duration: 22s;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, #a855f7 0%, transparent 68%);
+  bottom: -15%;
+  right: -8%;
+  animation-delay: -7s;
+  animation-duration: 26s;
 }
 
 .orb-3 {
-  width: 280px;
-  height: 280px;
-  background: radial-gradient(circle, #06b6d4 0%, transparent 70%);
-  top: 40%;
-  left: 55%;
-  animation-delay: -12s;
-  animation-duration: 20s;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, #22d3ee 0%, transparent 70%);
+  top: 38%;
+  left: 58%;
+  animation-delay: -13s;
+  animation-duration: 24s;
 }
 
 .orb-4 {
-  width: 200px;
-  height: 200px;
-  background: radial-gradient(circle, #ec4899 0%, transparent 70%);
-  top: 15%;
-  right: 20%;
-  opacity: 0.35;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, #f472b6 0%, transparent 70%);
+  top: 12%;
+  right: 18%;
+  opacity: 0.28;
   animation-delay: -4s;
-  animation-duration: 16s;
+  animation-duration: 19s;
 }
 
 @keyframes float {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(30px, -40px) scale(1.05);
-  }
-  66% {
-    transform: translate(-25px, 25px) scale(0.95);
-  }
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(28px, -36px) scale(1.04); }
+  66%      { transform: translate(-22px, 22px) scale(0.97); }
 }
 
-/* subtle noise / grain overlay */
+/* subtle grain */
 .login-app::after {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.03;
   pointer-events: none;
   z-index: 0;
 }
@@ -134,8 +121,8 @@
 /* ========== Toolbar ========== */
 .login-toolbar {
   position: fixed;
-  top: 24px;
-  right: 24px;
+  top: 22px;
+  right: 22px;
   z-index: 20;
   display: inline-flex;
   align-items: center;
@@ -143,29 +130,27 @@
 }
 
 .toolbar-btn {
-  width: 44px !important;
-  height: 44px !important;
-  min-width: 44px !important;
-  border-radius: 14px !important;
+  width: 42px !important;
+  height: 42px !important;
+  min-width: 42px !important;
+  border-radius: 12px !important;
   padding: 0 !important;
   border: 1px solid var(--toolbar-border) !important;
   background: var(--toolbar-bg) !important;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   color: var(--color-text) !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.22s ease;
 }
 
 .toolbar-btn:hover {
-  border-color: var(--color-accent) !important;
+  border-color: rgba(129, 140, 248, 0.5) !important;
   color: var(--color-accent) !important;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px var(--color-accent-glow);
+  background: rgba(255, 255, 255, 0.09) !important;
 }
 
 .toolbar-btn .anticon {
-  font-size: 17px;
+  font-size: 16px;
 }
 
 /* ========== Wrapper ========== */
@@ -175,49 +160,50 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 32px 20px;
+  padding: 28px 18px;
 }
 
-/* ========== Glass Card ========== */
+/* ========== Pure Glass Card ========== */
 .login-card.glass {
   position: relative;
   width: 100%;
-  max-width: 420px;
+  max-width: 400px;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
-  border-radius: 28px;
-  padding: 44px 36px 40px;
-  box-shadow: var(--glass-shadow);
-  backdrop-filter: blur(28px) saturate(180%);
-  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border-radius: 24px;
+  padding: 40px 32px 36px;
+  backdrop-filter: blur(32px) saturate(160%);
+  -webkit-backdrop-filter: blur(32px) saturate(160%);
   z-index: 2;
   overflow: hidden;
 }
 
-/* inner glow line */
+/* soft inner highlight */
 .login-card.glass::before {
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: 28px;
-  padding: 1px;
+  border-radius: 24px;
   background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.25) 0%,
-    transparent 40%,
-    transparent 60%,
-    rgba(168, 85, 247, 0.2) 100%
+    155deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    transparent 42%,
+    transparent 58%,
+    rgba(168, 85, 247, 0.08) 100%
   );
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
   pointer-events: none;
+  z-index: 0;
+}
+
+.login-card.glass > * {
+  position: relative;
+  z-index: 1;
 }
 
 @media (max-width: 480px) {
   .login-card.glass {
-    padding: 36px 24px 32px;
-    border-radius: 24px;
+    padding: 34px 22px 30px;
+    border-radius: 20px;
   }
 }
 
@@ -226,25 +212,24 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 28px;
+  gap: 8px;
+  margin-bottom: 26px;
 }
 
 .brand-logo {
-  width: 56px;
-  height: 56px;
-  border-radius: 18px;
-  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-2));
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #6366f1, #a855f7);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 10px 30px var(--color-accent-glow);
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .brand-letter {
   font-family: var(--font-display);
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 800;
   color: #fff;
   letter-spacing: -1px;
@@ -252,30 +237,27 @@
 
 .brand-name {
   font-family: var(--font-display);
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 700;
-  letter-spacing: -0.8px;
+  letter-spacing: -0.7px;
   color: var(--color-text);
   margin: 0;
-  background: linear-gradient(90deg, #f8fafc, #c7d2fe);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .brand-tagline {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
   color: var(--color-text-subtle);
-  letter-spacing: 0.3px;
+  letter-spacing: 0.4px;
   text-transform: uppercase;
+  opacity: 0.85;
 }
 
 /* ========== Welcome ========== */
 .welcome {
   text-align: center;
-  margin: 0 0 32px;
-  height: 36px;
+  margin: 0 0 28px;
+  height: 34px;
   position: relative;
   overflow: hidden;
 }
@@ -283,17 +265,17 @@
 .welcome-text {
   display: inline-block;
   font-family: var(--font-display);
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 600;
   color: var(--color-text);
-  letter-spacing: -0.4px;
-  animation: fadeSlide 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  letter-spacing: -0.3px;
+  animation: fadeSlide 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @keyframes fadeSlide {
   from {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
@@ -306,58 +288,58 @@
   color: var(--color-text-subtle) !important;
   font-weight: 500;
   font-size: 13px;
-  letter-spacing: 0.2px;
+  letter-spacing: 0.15px;
 }
 
 .login-form .ant-form-item {
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 
 .glass-input.ant-input,
 .glass-input.ant-input-password,
 .login-form .ant-input-affix-wrapper {
-  border-radius: 14px !important;
+  border-radius: 12px !important;
   border: 1px solid var(--input-border) !important;
   background: var(--input-bg) !important;
   color: var(--color-text) !important;
-  height: 48px !important;
+  height: 46px !important;
   backdrop-filter: blur(8px);
-  transition: all 0.25s ease !important;
+  transition: all 0.2s ease !important;
   box-shadow: none !important;
 }
 
 .login-form .ant-input-affix-wrapper {
-  padding-inline: 14px;
+  padding-inline: 13px;
 }
 
 .login-form .ant-input {
   background: transparent !important;
   color: var(--color-text) !important;
-  font-size: 15px;
+  font-size: 14.5px;
 }
 
 .login-form .ant-input::placeholder {
   color: var(--color-text-subtle) !important;
-  opacity: 0.7;
+  opacity: 0.65;
 }
 
 .input-icon {
   color: var(--color-text-subtle) !important;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .login-form .ant-input-affix-wrapper:hover,
 .login-form .ant-input-affix-wrapper-focused {
-  border-color: var(--color-accent) !important;
-  background: rgba(255, 255, 255, 0.1) !important;
-  box-shadow: 0 0 0 3px var(--color-accent-glow) !important;
+  border-color: rgba(129, 140, 248, 0.55) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 0 0 3px var(--color-accent-soft) !important;
 }
 
 .login-form .ant-input-password-icon {
   color: var(--color-text-subtle) !important;
 }
 
-/* Autofill fix */
+/* Autofill */
 .login-form input.ant-input:-webkit-autofill,
 .login-form input.ant-input:-webkit-autofill:hover,
 .login-form input.ant-input:-webkit-autofill:focus {
@@ -368,33 +350,32 @@
   caret-color: var(--color-text);
 }
 
-/* ========== Submit Button ========== */
+/* ========== Button ========== */
 .submit-row {
   margin-bottom: 0 !important;
-  margin-top: 12px !important;
+  margin-top: 10px !important;
 }
 
 .login-btn.ant-btn-primary {
-  height: 50px !important;
-  border-radius: 14px !important;
+  height: 48px !important;
+  border-radius: 12px !important;
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 16px;
-  letter-spacing: 0.2px;
-  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-2)) !important;
+  font-size: 15px;
+  letter-spacing: 0.15px;
+  background: linear-gradient(135deg, #6366f1, #a855f7) !important;
   border: none !important;
-  box-shadow: 0 8px 25px var(--color-accent-glow);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition: all 0.22s ease !important;
 }
 
 .login-btn.ant-btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 32px var(--color-accent-glow) !important;
-  filter: brightness(1.08);
+  filter: brightness(1.1);
+  transform: translateY(-1px);
 }
 
 .login-btn.ant-btn-primary:active {
   transform: translateY(0);
+  filter: brightness(0.98);
 }
 
 /* ========== Loading ========== */
@@ -407,15 +388,15 @@
   background-color: var(--color-accent);
 }
 
-/* ========== Responsive polish ========== */
+/* ========== Small screens ========== */
 @media (max-width: 380px) {
   .brand-name {
-    font-size: 24px;
+    font-size: 23px;
   }
   .welcome-text {
-    font-size: 20px;
+    font-size: 19px;
   }
   .login-card.glass {
-    padding: 32px 20px 28px;
+    padding: 30px 18px 26px;
   }
 }
