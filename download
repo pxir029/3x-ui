@@ -1,12 +1,10 @@
 .git
 .gitignore
 *.md
-deploy/
 docs/
-web/
-xray/
+deploy/
+frontend/
+node_modules/
 *.db
 db/
 cert/
-node_modules/
-frontend/

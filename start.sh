@@ -1,26 +1,26 @@
 #!/bin/bash
 set -e
 
-PORT="${PORT:-2053}"
+# Railway همیشه PORT را ست می‌کند. اگر نبود 8080
+export PORT="${PORT:-8080}"
 
-echo "========================================"
-echo "🚀 3x-ui starting on Railway"
-echo "   PORT = $PORT"
-echo "========================================"
+echo "=========================================="
+echo " 3x-ui Railway Starter"
+echo " PORT = ${PORT}"
+echo "=========================================="
 
 mkdir -p /etc/x-ui /var/log/x-ui
-
 cd /usr/local/x-ui
 
-# تنظیم پورت و listen روی همه اینترفیس‌ها
-# این دستور قبل از اولین اجرا تنظیمات را در دیتابیس می‌نویسد
-./x-ui setting -port "$PORT" -listenIP "0.0.0.0" 2>/dev/null || true
-./x-ui setting -webBasePath "/" 2>/dev/null || true
+# ۱. اول پورت و listen را تنظیم کن (قبل از استارت اصلی)
+./x-ui setting -port "${PORT}" || true
+./x-ui setting -listenIP "0.0.0.0" || true
+./x-ui setting -webBasePath "/" || true
 
-# نمایش تنظیمات فعلی برای دیباگ
-echo "----- Current settings -----"
-./x-ui setting -show true 2>/dev/null || true
-echo "----------------------------"
+echo "----- Settings after apply -----"
+./x-ui setting -show true || true
+echo "--------------------------------"
 
-echo "Starting x-ui process..."
+echo "Starting x-ui on 0.0.0.0:${PORT} ..."
+# اجرا در پیش‌زمینه با exec تا PID 1 باشد
 exec ./x-ui

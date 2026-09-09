@@ -3,7 +3,5 @@ builder = "dockerfile"
 dockerfilePath = "Dockerfile"
 
 [deploy]
-restartPolicyType = "always"
-# healthcheck اختیاری - اگر پنل هنوز بالا نیومده خطا نده
-# healthcheckPath = "/"
-# healthcheckTimeout = 100
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
