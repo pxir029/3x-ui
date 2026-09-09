@@ -50,5 +50,4 @@ ENV XUI_MAIN_FOLDER="/app"
 ENV XUI_ENABLE_FAIL2BAN="false"
 
 EXPOSE 8080
-VOLUME ["/etc/x-ui"]
 CMD ["/start.sh"]
