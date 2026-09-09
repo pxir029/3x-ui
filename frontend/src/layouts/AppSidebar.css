@@ -1,4 +1,18 @@
+/* ============================================
+   pxpanel Sidebar — Clean Glassmorphism
+   Matching Login + Dashboard theme
+   ============================================ */
+
 .ant-sidebar {
+  --sidebar-bg: rgba(255, 255, 255, 0.04);
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-text: #f1f5f9;
+  --sidebar-text-subtle: #94a3b8;
+  --sidebar-accent: #6366f1;
+  --sidebar-accent-soft: rgba(99, 102, 241, 0.16);
+  --logout-color: #ef4444;
+  --logout-soft: rgba(239, 68, 68, 0.14);
+
   flex: 0 0 var(--sider-rail, 72px);
   width: var(--sider-rail, 72px);
   position: relative;
@@ -10,10 +24,40 @@
   top: 0;
   height: 100vh;
   align-self: flex-start;
+  background: var(--sidebar-bg) !important;
+  border-right: 1px solid var(--sidebar-border) !important;
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  box-shadow: none !important;
 }
 
 .ant-sidebar:not(.sidebar-pinned) > .ant-layout-sider:not(.ant-layout-sider-collapsed) {
-  box-shadow: 0 0 32px rgba(0, 0, 0, 0.22);
+  box-shadow: none !important;
+}
+
+.ant-sidebar .ant-layout-sider-children {
+  background: transparent !important;
+}
+
+.ant-sidebar .ant-menu {
+  background: transparent !important;
+  border: none !important;
+  color: var(--sidebar-text);
+}
+
+.ant-sidebar .ant-menu-item,
+.ant-sidebar .ant-menu-submenu-title {
+  color: var(--sidebar-text-subtle) !important;
+  border-radius: 10px !important;
+  margin: 2px 8px !important;
+  width: calc(100% - 16px) !important;
+  transition: all 0.2s ease !important;
+}
+
+.ant-sidebar .ant-menu-item .anticon,
+.ant-sidebar .ant-menu-submenu-title .anticon {
+  font-size: 16px;
+  color: inherit !important;
 }
 
 .sider-nav .ant-menu-item .anticon,
@@ -22,12 +66,13 @@
   font-size: 16px;
 }
 
+/* Brand */
 .sider-brand,
 .drawer-brand {
-  font-weight: 600;
-  font-size: 18px;
-  letter-spacing: 0.5px;
-  color: var(--ant-color-text);
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: -0.3px;
+  color: var(--sidebar-text);
 }
 
 .sider-brand {
@@ -36,8 +81,8 @@
   justify-content: space-between;
   gap: 8px;
   height: 58px;
-  padding: 0 16px 0 24px;
-  border-bottom: 1px solid var(--ant-color-border-secondary);
+  padding: 0 14px 0 20px;
+  border-bottom: 1px solid var(--sidebar-border);
   user-select: none;
   white-space: nowrap;
   overflow: hidden;
@@ -50,180 +95,66 @@
   line-height: 1.1;
 }
 
+.brand-text {
+  background: linear-gradient(90deg, #f1f5f9, #a5b4fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
 .brand-actions {
   display: inline-flex;
   align-items: center;
-  gap: 0;
+  gap: 2px;
   flex-shrink: 0;
 }
 
 .brand-actions .sidebar-pin,
 .brand-actions .sidebar-docs,
-.brand-actions .sidebar-donate,
 .brand-actions .sidebar-theme-cycle {
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  height: 28px;
 }
 
-.sidebar-donate {
+/* Action buttons (pin / docs / theme) */
+.sidebar-docs,
+.sidebar-theme-cycle,
+.sidebar-pin {
   background: transparent;
   border: none;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--ant-color-text-secondary);
+  color: var(--sidebar-text-subtle);
   text-decoration: none;
   flex-shrink: 0;
-  transition:
-    background-color 0.2s,
-    transform 0.15s,
-    color 0.2s;
-}
-
-.sidebar-donate:hover,
-.sidebar-donate:focus-visible {
-  background-color: rgba(236, 72, 153, 0.12);
-  color: #ec4899;
-  transform: scale(1.08);
-  outline: none;
-}
-
-.sidebar-donate .anticon {
-  font-size: 16px;
-}
-
-.sidebar-docs {
-  background: transparent;
-  border: none;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--ant-color-text-secondary);
-  text-decoration: none;
-  flex-shrink: 0;
-  transition:
-    background-color 0.2s,
-    transform 0.15s,
-    color 0.2s;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s ease;
 }
 
 .sidebar-docs:hover,
-.sidebar-docs:focus-visible {
-  background-color: color-mix(in srgb, var(--ant-color-primary) 12%, transparent);
-  color: var(--ant-color-primary);
-  transform: scale(1.08);
-  outline: none;
-}
-
-.sidebar-docs .anticon {
-  font-size: 16px;
-}
-
-.sidebar-theme-cycle {
-  background: transparent;
-  border: none;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: var(--ant-color-text-secondary);
-  padding: 0;
-  flex-shrink: 0;
-  transition:
-    background-color 0.2s,
-    transform 0.15s,
-    color 0.2s;
-}
-
+.sidebar-docs:focus-visible,
 .sidebar-theme-cycle:hover,
-.sidebar-theme-cycle:focus-visible {
-  background-color: color-mix(in srgb, var(--ant-color-primary) 12%, transparent);
-  color: var(--ant-color-primary);
-  transform: scale(1.08);
+.sidebar-theme-cycle:focus-visible,
+.sidebar-pin:hover,
+.sidebar-pin:focus-visible {
+  background: var(--sidebar-accent-soft);
+  color: var(--sidebar-accent);
   outline: none;
 }
 
-.sidebar-theme-cycle .anticon {
-  font-size: 16px;
+.sidebar-docs .anticon,
+.sidebar-theme-cycle .anticon,
+.sidebar-pin .anticon {
+  font-size: 15px;
 }
 
-.drawer-header-actions {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.drawer-handle {
-  position: fixed;
-  top: 12px;
-  left: 12px;
-  z-index: 1100;
-  background: rgba(0, 0, 0, 0.55);
-  color: #fff;
-  border: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-}
-
-.drawer-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 16px;
-  border-bottom: 1px solid var(--ant-color-border-secondary);
-}
-
-.drawer-close {
-  background: transparent;
-  border: none;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 16px;
-  color: var(--ant-color-text-secondary);
-}
-
-.drawer-close:hover,
-.drawer-close:focus-visible {
-  background: var(--ant-color-fill-tertiary);
-}
-
-.drawer-menu .ant-menu-item {
-  height: 48px;
-  line-height: 48px;
-  margin: 0;
-  border-radius: 0;
-}
-
-.drawer-menu .ant-menu-item .anticon {
-  font-size: 16px;
-}
-
-.drawer-utility {
-  margin-top: auto;
-  border-top: 1px solid var(--ant-color-border-secondary);
-}
-
+/* Nav menus */
 .ant-sidebar > .ant-layout-sider .ant-layout-sider-children {
   display: flex;
   flex-direction: column;
@@ -235,84 +166,181 @@
   overflow-y: auto;
   overflow-x: hidden;
   min-height: 0;
+  padding: 8px 0;
 }
 
 .sider-utility {
   flex: 0 0 auto;
-  border-top: 1px solid var(--ant-color-border-secondary);
+  border-top: 1px solid var(--sidebar-border);
+  padding: 8px 0 12px;
 }
 
-.sider-footer {
-  flex: 0 0 auto;
-  padding: 8px 8px 12px;
+/* Selected / hover states */
+.sider-nav .ant-menu-item-selected,
+.sider-utility .ant-menu-item-selected,
+.drawer-menu .ant-menu-item-selected {
+  background: var(--sidebar-accent-soft) !important;
+  color: var(--sidebar-accent) !important;
 }
 
-.sidebar-pin {
+.sider-nav .ant-menu-item-active:not(.ant-menu-item-selected),
+.sider-utility .ant-menu-item-active:not(.ant-menu-item-selected),
+.drawer-menu .ant-menu-item-active:not(.ant-menu-item-selected),
+.sider-nav .ant-menu-item:not(.ant-menu-item-selected):not(.ant-menu-item-disabled):hover,
+.sider-utility .ant-menu-item:not(.ant-menu-item-selected):not(.ant-menu-item-disabled):hover,
+.drawer-menu .ant-menu-item:not(.ant-menu-item-selected):not(.ant-menu-item-disabled):hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: var(--sidebar-text) !important;
+}
+
+/* ========== Logout button — Red + Glass ========== */
+.sider-utility .ant-menu-item[data-menu-id*="__logout__"],
+.sider-utility .ant-menu-item:has(.anticon-logout),
+.drawer-utility .ant-menu-item:has(.anticon-logout) {
+  color: var(--logout-color) !important;
+  background: var(--logout-soft) !important;
+  border: 1px solid rgba(239, 68, 68, 0.22) !important;
+  border-radius: 10px !important;
+  margin: 6px 10px !important;
+  width: calc(100% - 20px) !important;
+  backdrop-filter: blur(8px);
+}
+
+.sider-utility .ant-menu-item[data-menu-id*="__logout__"] .anticon,
+.sider-utility .ant-menu-item:has(.anticon-logout) .anticon,
+.drawer-utility .ant-menu-item:has(.anticon-logout) .anticon {
+  color: var(--logout-color) !important;
+}
+
+.sider-utility .ant-menu-item[data-menu-id*="__logout__"]:hover,
+.sider-utility .ant-menu-item:has(.anticon-logout):hover,
+.drawer-utility .ant-menu-item:has(.anticon-logout):hover {
+  background: rgba(239, 68, 68, 0.22) !important;
+  color: #f87171 !important;
+  border-color: rgba(239, 68, 68, 0.4) !important;
+}
+
+/* Fallback for logout by last item */
+.sider-utility .ant-menu-item:last-child {
+  color: var(--logout-color) !important;
+  background: var(--logout-soft) !important;
+  border: 1px solid rgba(239, 68, 68, 0.22) !important;
+  border-radius: 10px !important;
+  margin: 6px 10px !important;
+  width: calc(100% - 20px) !important;
+}
+
+.sider-utility .ant-menu-item:last-child .anticon {
+  color: var(--logout-color) !important;
+}
+
+.sider-utility .ant-menu-item:last-child:hover {
+  background: rgba(239, 68, 68, 0.22) !important;
+  color: #f87171 !important;
+}
+
+/* Drawer (mobile) */
+.drawer-handle {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 1100;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  color: #f1f5f9;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  box-shadow: none;
+  transition: all 0.2s ease;
+}
+
+.drawer-handle:hover {
+  background: rgba(99, 102, 241, 0.18);
+  border-color: rgba(99, 102, 241, 0.35);
+  color: #818cf8;
+}
+
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--sidebar-border);
+  background: transparent;
+}
+
+.drawer-header-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.drawer-close {
+  background: transparent;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
-  padding: 0;
-  border: none;
-  border-radius: 50%;
-  background: transparent;
-  color: var(--ant-color-text-secondary);
   cursor: pointer;
-  flex-shrink: 0;
-  transition:
-    background-color 0.2s,
-    transform 0.15s,
-    color 0.2s;
+  font-size: 15px;
+  color: var(--sidebar-text-subtle);
+  transition: all 0.2s ease;
 }
 
-.sidebar-pin:hover,
-.sidebar-pin:focus-visible {
-  background-color: color-mix(in srgb, var(--ant-color-primary) 10%, transparent);
-  color: var(--ant-color-primary);
-  transform: scale(1.08);
-  outline: none;
+.drawer-close:hover,
+.drawer-close:focus-visible {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--sidebar-text);
 }
 
-.sidebar-pin .anticon {
+.drawer-menu .ant-menu-item {
+  height: 48px;
+  line-height: 48px;
+  margin: 2px 8px !important;
+  border-radius: 10px !important;
+}
+
+.drawer-menu .ant-menu-item .anticon {
   font-size: 16px;
 }
 
-.sider-version {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 10px;
-  width: 100%;
-  padding: 8px 16px;
-  color: var(--ant-color-text-secondary);
-  font-size: 13px;
-  font-weight: 500;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  text-decoration: none;
-  transition: color 0.2s;
+.drawer-utility {
+  margin-top: auto;
+  border-top: 1px solid var(--sidebar-border);
+  padding: 8px 0 12px;
 }
 
-.ant-layout-sider-collapsed .sider-version {
-  justify-content: center;
-  padding: 8px 0;
+/* Dark drawer background */
+body.dark .ant-drawer-content,
+body.dark .ant-drawer-body {
+  background: rgba(8, 12, 22, 0.92) !important;
+  backdrop-filter: blur(24px);
 }
 
-.sider-version .anticon {
-  font-size: 16px;
+html[data-theme='ultra-dark'] body.dark .ant-drawer-content,
+html[data-theme='ultra-dark'] body.dark .ant-drawer-body {
+  background: rgba(4, 6, 12, 0.95) !important;
 }
 
-.sider-version:hover,
-.sider-version:focus-visible {
-  color: var(--ant-color-primary);
-  outline: none;
+body.dark .ant-drawer-body .drawer-menu,
+body.dark .ant-drawer-body .drawer-menu.ant-menu-dark,
+body.dark .ant-drawer-body .drawer-menu .ant-menu-item,
+body.dark .ant-drawer-body .drawer-menu .ant-menu-sub,
+body.dark .ant-drawer-body .drawer-menu .ant-menu-item-group-list {
+  background-color: transparent;
 }
 
-.drawer-footer {
-  flex: 0 0 auto;
-  padding: 8px 8px 12px;
-}
-
+/* Mobile */
 @media (max-width: 768px) {
   .drawer-handle {
     display: inline-flex;
@@ -333,39 +361,4 @@
     flex: 0 0 0;
     width: 0;
   }
-}
-
-body.dark .ant-drawer-content,
-body.dark .ant-drawer-body {
-  background-color: #15161a;
-}
-
-html[data-theme='ultra-dark'] body.dark .ant-drawer-content,
-html[data-theme='ultra-dark'] body.dark .ant-drawer-body {
-  background-color: #050507;
-}
-
-body.dark .ant-drawer-body .drawer-menu,
-body.dark .ant-drawer-body .drawer-menu.ant-menu-dark,
-body.dark .ant-drawer-body .drawer-menu .ant-menu-item,
-body.dark .ant-drawer-body .drawer-menu .ant-menu-sub,
-body.dark .ant-drawer-body .drawer-menu .ant-menu-item-group-list {
-  background-color: transparent;
-}
-
-.sider-nav .ant-menu-item-selected,
-.sider-utility .ant-menu-item-selected,
-.drawer-menu .ant-menu-item-selected {
-  background-color: color-mix(in srgb, var(--ant-color-primary) 20%, transparent) !important;
-  color: var(--ant-color-primary) !important;
-}
-
-.sider-nav .ant-menu-item-active:not(.ant-menu-item-selected),
-.sider-utility .ant-menu-item-active:not(.ant-menu-item-selected),
-.drawer-menu .ant-menu-item-active:not(.ant-menu-item-selected),
-.sider-nav .ant-menu-item:not(.ant-menu-item-selected):not(.ant-menu-item-disabled):hover,
-.sider-utility .ant-menu-item:not(.ant-menu-item-selected):not(.ant-menu-item-disabled):hover,
-.drawer-menu .ant-menu-item:not(.ant-menu-item-selected):not(.ant-menu-item-disabled):hover {
-  background-color: color-mix(in srgb, var(--ant-color-primary) 10%, transparent) !important;
-  color: var(--ant-color-primary) !important;
 }
