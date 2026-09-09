@@ -1,47 +1,123 @@
+/* ============================================
+   pxpanel Subscription Page — Glassmorphism
+   Matching Login / Dashboard / Sidebar theme
+   ============================================ */
+
 .subscription-page {
-  --bg-page: #e6e8ec;
-  --bg-card: #ffffff;
+  --bg-page: #080c16;
+  --bg-card: rgba(255, 255, 255, 0.045);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --color-text: #f1f5f9;
+  --color-text-subtle: #94a3b8;
+  --color-accent: #6366f1;
+  --color-accent-soft: rgba(99, 102, 241, 0.16);
+
   min-height: 100vh;
   background: var(--bg-page);
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Soft ambient orbs (very subtle) */
+.subscription-page::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(79, 70, 229, 0.1) 0%, transparent 42%),
+    radial-gradient(circle at 88% 75%, rgba(99, 102, 241, 0.08) 0%, transparent 40%);
 }
 
 .subscription-page.is-dark {
-  --bg-page: #1a1b1f;
-  --bg-card: #23252b;
+  --bg-page: #060910;
+  --bg-card: rgba(255, 255, 255, 0.035);
+  --glass-border: rgba(255, 255, 255, 0.09);
 }
 
 .subscription-page.is-dark.is-ultra {
-  --bg-page: #000;
-  --bg-card: #101013;
+  --bg-page: #04060c;
+  --bg-card: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
 }
 
 .subscription-page .ant-layout,
 .subscription-page .ant-layout-content {
   background: transparent;
+  position: relative;
+  z-index: 1;
 }
 
+/* Content with breathing room from all sides */
 .subscription-page .content {
-  padding: 24px 12px;
+  padding: 28px 20px;
+  max-width: 720px;
+  margin: 0 auto;
 }
 
-.subscription-card {
-  margin-top: 8px;
+@media (max-width: 768px) {
+  .subscription-page .content {
+    padding: 20px 14px;
+  }
 }
 
+/* ========== Glass Cards ========== */
+.subscription-card,
+.subscription-page .ant-card {
+  margin-top: 12px;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 16px !important;
+  backdrop-filter: blur(22px) saturate(140%);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  box-shadow: none !important;
+  overflow: hidden;
+}
+
+.subscription-page .ant-card .ant-card-body {
+  background: transparent;
+  padding: 20px;
+}
+
+.subscription-page .ant-card .ant-card-head {
+  background: transparent;
+  border-bottom-color: var(--glass-border);
+  color: var(--color-text);
+}
+
+/* ========== QR ========== */
 .qr-tag {
   width: 100%;
   text-align: center;
   margin: 0;
+  padding: 12px 0;
 }
 
+/* ========== Info Table ========== */
 .info-table {
-  margin-top: 4px;
+  margin-top: 8px;
 }
 
+.subscription-page .ant-descriptions,
+.subscription-page .ant-descriptions-view {
+  background: transparent;
+}
+
+.subscription-page .ant-descriptions-item-label {
+  color: var(--color-text-subtle) !important;
+}
+
+.subscription-page .ant-descriptions-item-content {
+  color: var(--color-text) !important;
+}
+
+/* ========== Links Section ========== */
 .links-section {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
+  margin-top: 4px;
 }
 
 .sub-link-anchor {
@@ -51,34 +127,33 @@
 
 .sub-link-anchor:hover {
   text-decoration: underline;
+  color: var(--color-accent);
 }
 
 .sub-link-row {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  border-radius: 10px;
-  background: rgba(0, 0, 0, 0.03);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  transition:
-    background 120ms ease,
-    border-color 120ms ease;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  transition: all 0.2s ease;
 }
 
 .sub-link-row:hover {
-  background: rgba(0, 0, 0, 0.05);
-  border-color: rgba(0, 0, 0, 0.14);
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(99, 102, 241, 0.3);
 }
 
 .is-dark .sub-link-row {
-  background: rgba(0, 0, 0, 0.2);
-  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  border-color: var(--glass-border);
 }
 
 .is-dark .sub-link-row:hover {
-  background: rgba(0, 0, 0, 0.3);
-  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(99, 102, 241, 0.28);
 }
 
 .sub-link-tag {
@@ -86,12 +161,14 @@
   flex-shrink: 0;
   font-weight: 600;
   letter-spacing: 0.3px;
+  border-radius: 8px !important;
 }
 
 .sub-link-title {
   flex: 1;
   min-width: 0;
   font-size: 13px;
+  color: var(--color-text);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -99,33 +176,106 @@
 
 .sub-link-actions {
   display: flex;
-  gap: 4px;
+  gap: 6px;
   flex-shrink: 0;
+}
+
+.sub-link-actions .ant-btn {
+  border-radius: 8px !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid var(--glass-border) !important;
+  color: var(--color-text-subtle) !important;
+  transition: all 0.2s ease !important;
+}
+
+.sub-link-actions .ant-btn:hover {
+  background: var(--color-accent-soft) !important;
+  border-color: rgba(99, 102, 241, 0.35) !important;
+  color: var(--color-accent) !important;
 }
 
 .sub-link-qr-popover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  padding: 8px;
 }
 
+/* ========== Apps Row ========== */
 .apps-row {
-  margin-top: 24px;
+  margin-top: 28px;
+  padding-top: 8px;
 }
 
 .app-col {
   text-align: center;
+  padding: 8px;
 }
 
+.subscription-page .app-col .ant-btn,
+.subscription-page .app-col a {
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+/* ========== Toolbar ========== */
 .toolbar-btn {
-  width: 40px;
-  height: 40px;
-  min-width: 40px;
-  border-radius: 50%;
-  padding: 0;
+  width: 42px !important;
+  height: 42px !important;
+  min-width: 42px !important;
+  border-radius: 12px !important;
+  padding: 0 !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid var(--glass-border) !important;
+  color: var(--color-text) !important;
+  backdrop-filter: blur(12px);
+  transition: all 0.2s ease !important;
+}
+
+.toolbar-btn:hover {
+  background: var(--color-accent-soft) !important;
+  border-color: rgba(99, 102, 241, 0.4) !important;
+  color: var(--color-accent) !important;
 }
 
 .toolbar-btn .anticon {
-  font-size: 18px;
+  font-size: 17px;
+}
+
+/* ========== Tags & Status ========== */
+.subscription-page .ant-tag {
+  border-radius: 8px;
+  border: none;
+  font-weight: 500;
+}
+
+/* ========== Spacing polish ========== */
+.subscription-page .ant-space {
+  gap: 12px !important;
+}
+
+.subscription-page .ant-divider {
+  border-color: var(--glass-border);
+  margin: 16px 0;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .subscription-page .content {
+    padding: 16px 12px;
+  }
+
+  .sub-link-row {
+    padding: 10px 12px;
+    gap: 8px;
+  }
+
+  .sub-link-title {
+    font-size: 12px;
+  }
+
+  .subscription-page .ant-card .ant-card-body {
+    padding: 16px;
+  }
 }
