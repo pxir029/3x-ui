@@ -1,5 +1,5 @@
 /* ============================================
-   pxpanel — Ultra Clean Glassmorphism Login
+   pxpanel — Clean & Subtle Glassmorphism
    ============================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap');
@@ -8,18 +8,18 @@
   --font-main: 'Inter', system-ui, -apple-system, sans-serif;
   --font-display: 'Outfit', 'Inter', system-ui, sans-serif;
 
-  --bg-page: #070b14;
-  --glass-bg: rgba(255, 255, 255, 0.055);
-  --glass-border: rgba(255, 255, 255, 0.14);
+  --bg-page: #080c16;
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.12);
   --color-text: #f1f5f9;
   --color-text-subtle: #94a3b8;
-  --color-accent: #818cf8;
-  --color-accent-2: #c084fc;
-  --color-accent-soft: rgba(129, 140, 248, 0.18);
-  --input-bg: rgba(255, 255, 255, 0.05);
-  --input-border: rgba(255, 255, 255, 0.12);
-  --toolbar-bg: rgba(255, 255, 255, 0.06);
-  --toolbar-border: rgba(255, 255, 255, 0.13);
+  --color-accent: #6366f1;          /* Indigo اصلی */
+  --color-accent-hover: #4f46e5;
+  --color-accent-soft: rgba(99, 102, 241, 0.16);
+  --input-bg: rgba(255, 255, 255, 0.045);
+  --input-border: rgba(255, 255, 255, 0.11);
+  --toolbar-bg: rgba(255, 255, 255, 0.055);
+  --toolbar-border: rgba(255, 255, 255, 0.12);
 
   position: relative;
   min-height: 100vh;
@@ -30,12 +30,12 @@
 
 .login-app.is-dark,
 .login-app.is-ultra {
-  --bg-page: #05070f;
-  --glass-bg: rgba(255, 255, 255, 0.045);
-  --glass-border: rgba(255, 255, 255, 0.11);
+  --bg-page: #060910;
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.1);
 }
 
-/* ========== Soft Ambient Orbs ========== */
+/* ========== Background Orbs (خیلی خفیف) ========== */
 .bg-orbs {
   position: absolute;
   inset: 0;
@@ -47,63 +47,54 @@
 .orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(100px);
-  opacity: 0.4;
-  animation: float 22s ease-in-out infinite;
+  filter: blur(120px);
+  opacity: 0.18;                 /* خیلی خفیف */
+  animation: float 28s ease-in-out infinite;
 }
 
 .orb-1 {
-  width: 480px;
-  height: 480px;
-  background: radial-gradient(circle, #6366f1 0%, transparent 68%);
-  top: -18%;
-  left: -12%;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, #4f46e5 0%, transparent 70%);
+  top: -20%;
+  left: -15%;
 }
 
 .orb-2 {
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, #a855f7 0%, transparent 68%);
-  bottom: -15%;
-  right: -8%;
-  animation-delay: -7s;
-  animation-duration: 26s;
+  width: 440px;
+  height: 440px;
+  background: radial-gradient(circle, #6366f1 0%, transparent 70%);
+  bottom: -18%;
+  right: -12%;
+  animation-delay: -9s;
+  animation-duration: 32s;
 }
 
 .orb-3 {
-  width: 320px;
-  height: 320px;
-  background: radial-gradient(circle, #22d3ee 0%, transparent 70%);
-  top: 38%;
-  left: 58%;
-  animation-delay: -13s;
-  animation-duration: 24s;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #3b82f6 0%, transparent 72%);
+  top: 42%;
+  left: 60%;
+  opacity: 0.12;
+  animation-delay: -15s;
+  animation-duration: 30s;
 }
 
-.orb-4 {
-  width: 220px;
-  height: 220px;
-  background: radial-gradient(circle, #f472b6 0%, transparent 70%);
-  top: 12%;
-  right: 18%;
-  opacity: 0.28;
-  animation-delay: -4s;
-  animation-duration: 19s;
-}
+/* orb-4 حذف شد تا شلوغی کم بشه */
 
 @keyframes float {
   0%, 100% { transform: translate(0, 0) scale(1); }
-  33%      { transform: translate(28px, -36px) scale(1.04); }
-  66%      { transform: translate(-22px, 22px) scale(0.97); }
+  50%      { transform: translate(18px, -22px) scale(1.03); }
 }
 
-/* subtle grain */
+/* grain خیلی ملایم */
 .login-app::after {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.025;
   pointer-events: none;
   z-index: 0;
 }
@@ -140,13 +131,13 @@
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   color: var(--color-text) !important;
-  transition: all 0.22s ease;
+  transition: all 0.2s ease;
 }
 
 .toolbar-btn:hover {
-  border-color: rgba(129, 140, 248, 0.5) !important;
+  border-color: rgba(99, 102, 241, 0.45) !important;
   color: var(--color-accent) !important;
-  background: rgba(255, 255, 255, 0.09) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
 }
 
 .toolbar-btn .anticon {
@@ -163,33 +154,33 @@
   padding: 28px 18px;
 }
 
-/* ========== Pure Glass Card ========== */
+/* ========== Glass Card ========== */
 .login-card.glass {
   position: relative;
   width: 100%;
   max-width: 400px;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
-  border-radius: 24px;
+  border-radius: 22px;
   padding: 40px 32px 36px;
-  backdrop-filter: blur(32px) saturate(160%);
-  -webkit-backdrop-filter: blur(32px) saturate(160%);
+  backdrop-filter: blur(28px) saturate(150%);
+  -webkit-backdrop-filter: blur(28px) saturate(150%);
   z-index: 2;
   overflow: hidden;
 }
 
-/* soft inner highlight */
+/* highlight داخلی خیلی نرم */
 .login-card.glass::before {
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: 24px;
+  border-radius: 22px;
   background: linear-gradient(
-    155deg,
-    rgba(255, 255, 255, 0.12) 0%,
-    transparent 42%,
-    transparent 58%,
-    rgba(168, 85, 247, 0.08) 100%
+    160deg,
+    rgba(255, 255, 255, 0.09) 0%,
+    transparent 45%,
+    transparent 55%,
+    rgba(99, 102, 241, 0.05) 100%
   );
   pointer-events: none;
   z-index: 0;
@@ -203,7 +194,7 @@
 @media (max-width: 480px) {
   .login-card.glass {
     padding: 34px 22px 30px;
-    border-radius: 20px;
+    border-radius: 18px;
   }
 }
 
@@ -217,10 +208,10 @@
 }
 
 .brand-logo {
-  width: 52px;
-  height: 52px;
-  border-radius: 16px;
-  background: linear-gradient(135deg, #6366f1, #a855f7);
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
+  background: var(--color-accent);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -229,7 +220,7 @@
 
 .brand-letter {
   font-family: var(--font-display);
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 800;
   color: #fff;
   letter-spacing: -1px;
@@ -237,9 +228,9 @@
 
 .brand-name {
   font-family: var(--font-display);
-  font-size: 26px;
+  font-size: 25px;
   font-weight: 700;
-  letter-spacing: -0.7px;
+  letter-spacing: -0.6px;
   color: var(--color-text);
   margin: 0;
 }
@@ -248,9 +239,9 @@
   font-size: 12px;
   font-weight: 500;
   color: var(--color-text-subtle);
-  letter-spacing: 0.4px;
+  letter-spacing: 0.35px;
   text-transform: uppercase;
-  opacity: 0.85;
+  opacity: 0.8;
 }
 
 /* ========== Welcome ========== */
@@ -265,17 +256,17 @@
 .welcome-text {
   display: inline-block;
   font-family: var(--font-display);
-  font-size: 22px;
+  font-size: 21px;
   font-weight: 600;
   color: var(--color-text);
-  letter-spacing: -0.3px;
-  animation: fadeSlide 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  letter-spacing: -0.25px;
+  animation: fadeSlide 0.48s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @keyframes fadeSlide {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
@@ -288,7 +279,7 @@
   color: var(--color-text-subtle) !important;
   font-weight: 500;
   font-size: 13px;
-  letter-spacing: 0.15px;
+  letter-spacing: 0.1px;
 }
 
 .login-form .ant-form-item {
@@ -298,12 +289,12 @@
 .glass-input.ant-input,
 .glass-input.ant-input-password,
 .login-form .ant-input-affix-wrapper {
-  border-radius: 12px !important;
+  border-radius: 11px !important;
   border: 1px solid var(--input-border) !important;
   background: var(--input-bg) !important;
   color: var(--color-text) !important;
   height: 46px !important;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(6px);
   transition: all 0.2s ease !important;
   box-shadow: none !important;
 }
@@ -320,7 +311,7 @@
 
 .login-form .ant-input::placeholder {
   color: var(--color-text-subtle) !important;
-  opacity: 0.65;
+  opacity: 0.6;
 }
 
 .input-icon {
@@ -330,8 +321,8 @@
 
 .login-form .ant-input-affix-wrapper:hover,
 .login-form .ant-input-affix-wrapper-focused {
-  border-color: rgba(129, 140, 248, 0.55) !important;
-  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(99, 102, 241, 0.5) !important;
+  background: rgba(255, 255, 255, 0.07) !important;
   box-shadow: 0 0 0 3px var(--color-accent-soft) !important;
 }
 
@@ -350,7 +341,7 @@
   caret-color: var(--color-text);
 }
 
-/* ========== Button ========== */
+/* ========== Button (رنگ دقیق Indigo) ========== */
 .submit-row {
   margin-bottom: 0 !important;
   margin-top: 10px !important;
@@ -358,24 +349,24 @@
 
 .login-btn.ant-btn-primary {
   height: 48px !important;
-  border-radius: 12px !important;
+  border-radius: 11px !important;
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 15px;
-  letter-spacing: 0.15px;
-  background: linear-gradient(135deg, #6366f1, #a855f7) !important;
+  letter-spacing: 0.1px;
+  background: var(--color-accent) !important;
   border: none !important;
-  transition: all 0.22s ease !important;
+  transition: all 0.2s ease !important;
 }
 
 .login-btn.ant-btn-primary:hover {
-  filter: brightness(1.1);
+  background: var(--color-accent-hover) !important;
   transform: translateY(-1px);
 }
 
 .login-btn.ant-btn-primary:active {
   transform: translateY(0);
-  filter: brightness(0.98);
+  background: #4338ca !important;
 }
 
 /* ========== Loading ========== */
@@ -391,7 +382,7 @@
 /* ========== Small screens ========== */
 @media (max-width: 380px) {
   .brand-name {
-    font-size: 23px;
+    font-size: 22px;
   }
   .welcome-text {
     font-size: 19px;
