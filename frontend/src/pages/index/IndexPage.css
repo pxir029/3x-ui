@@ -1,14 +1,50 @@
-/* Overview page — trend-first layout. Every colour comes from the AntD theme
-   tokens so light / dark / ultra-dark keep working and the sidebar is untouched.
-   Set --ov-accent once here if you want a fixed accent instead of the primary. */
+/* ============================================
+   pxpanel Dashboard — Clean Glassmorphism
+   Matching Login theme (subtle indigo, low orbs)
+   ============================================ */
 
 .index-page {
-  --ov-accent: var(--ant-color-primary);
-  --ov-line: var(--ant-color-border);
-  --ov-label: var(--ant-color-text-secondary);
-  --ov-faint: var(--ant-color-text-tertiary);
-  --ov-gap: 12px;
-  --ov-pad: 20px;
+  --ov-accent: #6366f1;
+  --ov-line: rgba(255, 255, 255, 0.1);
+  --ov-label: #94a3b8;
+  --ov-faint: #64748b;
+  --ov-gap: 14px;
+  --ov-pad: 18px;
+
+  --glass-bg: rgba(255, 255, 255, 0.045);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-highlight: rgba(255, 255, 255, 0.07);
+  --color-text: #f1f5f9;
+  --bg-page: #080c16;
+}
+
+.index-page.is-dark,
+.index-page.is-ultra {
+  --bg-page: #060910;
+  --glass-bg: rgba(255, 255, 255, 0.035);
+  --glass-border: rgba(255, 255, 255, 0.09);
+}
+
+/* Subtle background orbs (very low opacity) */
+.index-page::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(79, 70, 229, 0.11) 0%, transparent 42%),
+    radial-gradient(circle at 88% 78%, rgba(99, 102, 241, 0.09) 0%, transparent 40%),
+    radial-gradient(circle at 70% 25%, rgba(59, 130, 246, 0.06) 0%, transparent 35%);
+}
+
+.index-page .content-shell,
+.index-page .content-area,
+.index-page .ant-layout,
+.index-page .ant-layout-content {
+  background: transparent !important;
+  position: relative;
+  z-index: 1;
 }
 
 @media (max-width: 768px) {
@@ -18,7 +54,7 @@
   }
 
   .index-page {
-    --ov-gap: 8px;
+    --ov-gap: 10px;
     --ov-pad: 14px;
   }
 }
@@ -29,24 +65,30 @@
   gap: var(--ov-gap);
 }
 
-/* — action bar — */
-
+/* ——— Action bar ——— */
 .ov-bar {
   display: flex;
   align-items: center;
   gap: 12px;
   flex-wrap: wrap;
+  padding: 12px 16px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 .ov-state {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 4px 12px;
-  border: 1px solid var(--ov-line);
+  padding: 5px 14px;
+  border: 1px solid var(--glass-border);
   border-radius: 999px;
   font-size: 13px;
-  color: var(--ant-color-text);
+  color: var(--color-text);
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .ov-state-dot {
@@ -64,18 +106,12 @@
   inset: -1px;
   border-radius: 50%;
   border: 1px solid currentColor;
-  animation: ovPulse 1.6s infinite ease-out;
+  animation: ovPulse 1.8s infinite ease-out;
 }
 
 @keyframes ovPulse {
-  0% {
-    transform: scale(0.9);
-    opacity: 0.5;
-  }
-  100% {
-    transform: scale(2.4);
-    opacity: 0;
-  }
+  0% { transform: scale(0.9); opacity: 0.5; }
+  100% { transform: scale(2.3); opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -99,7 +135,7 @@
 .ov-state-version:focus-visible,
 .ov-panel-version:hover,
 .ov-panel-version:focus-visible {
-  color: var(--ant-color-primary);
+  color: var(--ov-accent);
 }
 
 .ov-panel-version {
@@ -145,6 +181,11 @@
   align-items: center;
   gap: 8px;
   font-size: 12.5px;
+  padding: 8px 14px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  backdrop-filter: blur(12px);
 }
 
 .ov-health-mark {
@@ -157,21 +198,20 @@
 .ov-rule {
   height: 1px;
   border: 0;
-  margin: 0;
+  margin: 4px 0;
   background: linear-gradient(
     to right,
     transparent,
-    var(--ov-line) 48px,
-    var(--ov-line) calc(100% - 48px),
+    var(--ov-line) 40px,
+    var(--ov-line) calc(100% - 40px),
     transparent
   );
 }
 
-/* — shared type — */
-
+/* ——— Shared type ——— */
 .ov-kicker {
   font-size: 11px;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
   color: var(--ov-label);
 }
@@ -192,8 +232,7 @@
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
-/* — vitals tiles — */
-
+/* ——— Vitals tiles (glass cards) ——— */
 .ov-vitals {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -214,6 +253,18 @@
 
 .ov-tile {
   overflow: hidden;
+  background: var(--glass-bg) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 16px !important;
+  backdrop-filter: blur(22px) saturate(140%);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  box-shadow: none !important;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.ov-tile:hover {
+  border-color: rgba(99, 102, 241, 0.28) !important;
+  background: rgba(255, 255, 255, 0.055) !important;
 }
 
 .ov-tile-head {
@@ -237,11 +288,11 @@
 }
 
 .ov-tile-number {
-  font-size: 34px;
+  font-size: 32px;
   font-weight: 600;
   line-height: 1;
   letter-spacing: -0.02em;
-  color: var(--ant-color-text);
+  color: var(--color-text);
   font-variant-numeric: tabular-nums;
 }
 
@@ -262,7 +313,7 @@
   gap: 8px;
   padding: 14px var(--ov-pad) 0;
   font-size: 10px;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--ov-faint);
 }
@@ -271,8 +322,7 @@
   margin-top: 6px;
 }
 
-/* — throughput + connections — */
-
+/* ——— Throughput + Connections ——— */
 .ov-mid {
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
@@ -283,6 +333,17 @@
   .ov-mid {
     grid-template-columns: minmax(0, 1fr);
   }
+}
+
+.ov-mid .ant-card,
+.ov-wide,
+.ov-conn {
+  background: var(--glass-bg) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 16px !important;
+  backdrop-filter: blur(22px) saturate(140%);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  box-shadow: none !important;
 }
 
 .ov-wide-head {
@@ -317,7 +378,7 @@
 .ov-legend-num {
   font-size: 13px;
   font-weight: 600;
-  color: var(--ant-color-text);
+  color: var(--color-text);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
@@ -374,7 +435,7 @@
   font-size: 18px;
   font-weight: 600;
   margin-top: 4px;
-  color: var(--ant-color-text);
+  color: var(--color-text);
   font-variant-numeric: tabular-nums;
 }
 
@@ -394,10 +455,17 @@
   }
 }
 
-/* — system strip — */
+/* ——— System strip ——— */
+.ov-strip,
+.ov-strip-grid {
+  background: var(--glass-bg) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 16px !important;
+  backdrop-filter: blur(22px) saturate(140%);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  box-shadow: none !important;
+}
 
-/* tracks follow SystemStrip's cell order:
-   uptime (xray | os) · panel (memory | threads) · ip addresses */
 .ov-strip-grid {
   display: grid;
   grid-template-columns: minmax(max-content, 1.2fr) minmax(max-content, 1.2fr) minmax(0, 1.6fr);
@@ -431,10 +499,10 @@
 }
 
 .ov-strip-value {
-  font-size: 19px;
+  font-size: 18px;
   font-weight: 600;
   margin-top: 6px;
-  color: var(--ant-color-text);
+  color: var(--color-text);
   font-variant-numeric: tabular-nums;
 }
 
@@ -452,7 +520,7 @@
 
 .ov-strip-sub {
   font-size: 10px;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   margin-top: 8px;
   color: var(--ov-faint);
@@ -474,14 +542,38 @@
   color: var(--ov-label);
 }
 
-/* — preserved from the previous overview — */
-
+/* ——— Preserved ——— */
 .index-page .ip-toggle-icon {
   cursor: pointer;
   font-size: 15px;
   margin-inline-start: auto;
+  color: var(--ov-label);
+  transition: color 0.2s;
+}
+
+.index-page .ip-toggle-icon:hover {
+  color: var(--ov-accent);
 }
 
 .index-page .ip-hidden {
   filter: blur(6px);
+}
+
+/* Make all ant-cards on this page glass */
+.index-page .ant-card {
+  background: var(--glass-bg) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 16px !important;
+  backdrop-filter: blur(22px) saturate(140%);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  box-shadow: none !important;
+}
+
+.index-page .ant-card .ant-card-body {
+  background: transparent;
+}
+
+.index-page .ant-card .ant-card-actions {
+  background: transparent;
+  border-top-color: var(--ov-line);
 }
